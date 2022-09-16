@@ -1083,7 +1083,7 @@ func (p *asyncProducer) returnError(msg *ProducerMessage, err error) {
 		p.txnmgr.bumpEpoch()
 	}
 	msg.clear()
-	fmt.Println("<><><><><> ", msg, err, debug.Stack())
+	fmt.Printf("===== : %#v, %v, %s\n", *msg, err, debug.Stack())
 	pErr := &ProducerError{Msg: msg, Err: err}
 	if p.conf.Producer.Return.Errors {
 		fmt.Println("========== berniedzhao-1087", pErr)
