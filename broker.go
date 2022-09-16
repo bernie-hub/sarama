@@ -188,7 +188,7 @@ func (b *Broker) Open(conf *Config) error {
 		if conf.Net.SASL.Enable {
 			b.connErr = b.authenticateViaSASL()
 
-			fmt.Println("berniedzhao ----- ", b.connErr.Error())
+			fmt.Println("berniedzhao ----- ", b.connErr)
 
 			if b.connErr != nil {
 				err = b.conn.Close()
