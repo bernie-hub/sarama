@@ -2,6 +2,7 @@ package sarama
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
 	"sort"
 	"sync"
@@ -312,6 +313,7 @@ func (client *client) Partitions(topic string) ([]int32, error) {
 	if len(partitions) == 0 {
 		err := client.RefreshMetadata(topic)
 		if err != nil {
+			fmt.Println("zzzzzzzzzzzzz ", err)
 			return nil, err
 		}
 		partitions = client.cachedPartitions(topic, allPartitions)
@@ -892,6 +894,7 @@ func (client *client) tryRefreshMetadata(topics []string, attemptsRemaining int,
 			req.Version = 1
 		}
 		response, err := broker.GetMetadata(req)
+		fmt.Println("zzzzzzzzzzz 22222222222222", err)
 		switch err := err.(type) {
 		case nil:
 			allKnownMetaData := len(topics) == 0
@@ -908,6 +911,7 @@ func (client *client) tryRefreshMetadata(topics []string, attemptsRemaining int,
 			return err
 
 		case KError:
+			fmt.Println("zzzzzzzzzzzz 333333333", err)
 			// if SASL auth error return as this _should_ be a non retryable err for all brokers
 			if errors.Is(err, ErrSASLAuthenticationFailed) {
 				Logger.Println("client/metadata failed SASL authentication")
