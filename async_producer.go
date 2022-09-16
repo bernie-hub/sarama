@@ -434,6 +434,9 @@ func (tp *topicProducer) dispatch() {
 }
 
 func (tp *topicProducer) partitionMessage(msg *ProducerMessage) error {
+	defer func() {
+		fmt.Println("partitionMessage ", string(debug.Stack()))
+	}()
 	var partitions []int32
 
 	err := tp.breaker.Run(func() (err error) {
@@ -452,12 +455,14 @@ func (tp *topicProducer) partitionMessage(msg *ProducerMessage) error {
 		return
 	})
 	if err != nil {
+		fmt.Println("1111111111111111111")
 		return err
 	}
 
 	numPartitions := int32(len(partitions))
 
 	if numPartitions == 0 {
+		fmt.Println("2222222222222222222222222")
 		return ErrLeaderNotAvailable
 	}
 
