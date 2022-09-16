@@ -343,6 +343,7 @@ func (p *asyncProducer) dispatcher() {
 				// which hasn't been incremented yet for this message, and shouldn't be
 				pErr := &ProducerError{Msg: msg, Err: ErrShuttingDown}
 				if p.conf.Producer.Return.Errors {
+					fmt.Printf("========== in 234 : %s\n", pErr)
 					p.errors <- pErr
 				} else {
 					Logger.Println(pErr)
@@ -1083,6 +1084,7 @@ func (p *asyncProducer) returnError(msg *ProducerMessage, err error) {
 	msg.clear()
 	pErr := &ProducerError{Msg: msg, Err: err}
 	if p.conf.Producer.Return.Errors {
+		fmt.Println("========== berniedzhao-1087", pErr)
 		p.errors <- pErr
 	} else {
 		Logger.Println(pErr)
