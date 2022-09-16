@@ -449,8 +449,10 @@ func (tp *topicProducer) partitionMessage(msg *ProducerMessage) error {
 
 		if requiresConsistency {
 			partitions, err = tp.parent.client.Partitions(msg.Topic)
+			fmt.Println("------- 11111111 ", err)
 		} else {
 			partitions, err = tp.parent.client.WritablePartitions(msg.Topic)
+			fmt.Println("-------- 22222222 ", err)
 		}
 		return
 	})
