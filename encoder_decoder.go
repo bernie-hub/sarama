@@ -83,10 +83,12 @@ func versionedDecode(buf []byte, in versionedDecoder, version int16) error {
 	helper := realDecoder{raw: buf}
 	err := in.decode(&helper, version)
 	if err != nil {
+		fmt.Println("encoder decoder 11111 ", err)
 		return err
 	}
 
 	if helper.off != len(buf) {
+		fmt.Println("encoder decoder 22222 ", helper.off, len(buf))
 		return PacketDecodingError{"invalid length"}
 	}
 
