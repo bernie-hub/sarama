@@ -76,6 +76,7 @@ func decode(buf []byte, in decoder) error {
 }
 
 func versionedDecode(buf []byte, in versionedDecoder, version int16) error {
+	fmt.Println("decoder encoder 33333 ", buf)
 	if buf == nil {
 		return nil
 	}

@@ -824,10 +824,8 @@ func (b *Broker) sendAndReceive(req protocolBody, res protocolBody) error {
 
 	select {
 	case buf := <-promise.packets:
-		fmt.Println("broker 44444 ", buf)
 		return versionedDecode(buf, res, req.version())
 	case err = <-promise.errors:
-		fmt.Println("broker 33333 ", err)
 		return err
 	}
 }
