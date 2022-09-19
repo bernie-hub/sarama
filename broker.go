@@ -934,6 +934,7 @@ func (b *Broker) responseReceiver() {
 
 		buf := make([]byte, decodedHeader.length-int32(headerLength)+4)
 		bytesReadBody, err := b.readFull(buf)
+		fmt.Println("======= broker 5555555 ", response, decodedHeader.length, headerLength, bytesReadBody)
 		b.updateIncomingCommunicationMetrics(bytesReadHeader+bytesReadBody, requestLatency)
 		if err != nil {
 			dead = err
