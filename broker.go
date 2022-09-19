@@ -284,6 +284,7 @@ func (b *Broker) GetMetadata(request *MetadataRequest) (*MetadataResponse, error
 	response := new(MetadataResponse)
 
 	err := b.sendAndReceive(request, response)
+	fmt.Println("broker 11111 ", err)
 	if err != nil {
 		if errors.Is(err, io.EOF) || errors.Is(err, io.ErrUnexpectedEOF) {
 			// An EOF while fetching metadata is a special case, since it
@@ -814,6 +815,8 @@ func (b *Broker) sendAndReceive(req protocolBody, res protocolBody) error {
 	if err != nil {
 		return err
 	}
+
+	fmt.Println("broker 22222 ", err, req.key(), req.version(), res.key(), res.version())
 
 	if promise == nil {
 		return nil
